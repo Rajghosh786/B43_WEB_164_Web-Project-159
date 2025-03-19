@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
-import { UserContext } from '../context/ContextApi'
-import { Navigate } from 'react-router-dom'
+import  { useContext } from 'react'
+import  { UserContext } from '../context/ContextApi'
+import  { Navigate,Outlet } from 'react-router-dom'
 
-const PrivateRoutes = ({ children }) => {
+const PrivateRoutes = () => {
   const { loggedIn } = useContext(UserContext)
   console.log(loggedIn)
   if (loggedIn) {
-    return children
+    return <Outlet/>
   } else {
     return <Navigate to="/login" />
   }
