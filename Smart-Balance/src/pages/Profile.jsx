@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Linkedin, Github, Twitter, Dribbble, Pen } from 'lucide-react';
+import { Facebook, Linkedin, Github, Twitter, Dribbble, Pen } from "lucide-react";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 
@@ -35,91 +35,98 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const parsedUserDetails = JSON.parse(localStorage.getItem("userdetails"));   
-      fetchUserData(parsedUserDetails.uid);
+    const parsedUserDetails = JSON.parse(localStorage.getItem("userdetails"));
+    fetchUserData(parsedUserDetails.uid);
   }, []);
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
   };
 
+  const icons = {
+    Linkedin: Linkedin,
+    Github: Github,
+    Facebook: Facebook,
+    Twitter: Twitter,
+    Dribbble: Dribbble,
+  };
   return (
-    <div className="flex justify-center items-center min-h-screen to-teal-400 profile">
-      <div className="flex flex-col sm:flex-row bg-white rounded-3xl shadow-2xl max-w-6xl w-full p-8 gap-8">
-        <div className="flex flex-col items-center sm:items-start gap-8 sm:w-1/3">
-          <div className="w-full flex justify-between items-center">
-            <h1 className="text-2xl font-semibold text-teal-600">
-              {`${usersData.firstName} ${usersData.lastName}`}
-            </h1>
-            <div className="flex gap-4">
-              <Link>
-                <Linkedin className="text-teal-600 hover:text-teal-800 transition-colors" />
-              </Link>
-              <Link>
-                <Github className="text-teal-600 hover:text-teal-800 transition-colors" />
-              </Link>
-              <Link>
-                <Facebook className="text-teal-600 hover:text-teal-800 transition-colors" />
-              </Link>
-              <Link>
-                <Twitter className="text-teal-600 hover:text-teal-800 transition-colors" />
-              </Link>
-              <Link>
-                <Dribbble className="text-teal-600 hover:text-teal-800 transition-colors" />
-              </Link>
+    <div className="p-8 bg-gradient-to-r from-indigo-100 to-gray-200 min-h-screen">
+    <div className="flex justify-center items-center min-h-screen ">
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-6xl p-10 flex flex-col sm:flex-row gap-12 bg-gradient-to-r from-teal-100 to-blue-200 ">
+
+        <div className="flex flex-col items-center sm:items-start sm:w-1/3">
+          <div className="w-full flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-semibold text-teal-700">{`${usersData.firstName} ${usersData.lastName}`}</h1>
+            <button
+              onClick={handleEditToggle}
+              className="p-2 bg-teal-600 text-white rounded-full hover:bg-teal-700 transition"
+            >
+              <Pen />
+            </button>
+          </div>
+          <div className="relative mb-6">
+            <img
+              src="https://www.usnews.com/object/image/0000017f-2352-df1a-a3ff-b77bab9e0000/gettyimages-1369617365.jpg?update-time=1645565687144&size=responsive640"
+              alt="Profile"
+              className="w-40 h-40 rounded-full object-cover border-4 border-teal-300 transform transition-all duration-300 hover:scale-110 shadow-xl"
+            />
+            <div className="absolute top-0 right-0 bg-teal-500 p-1 rounded-full">
+              <Link to="#" className="text-white text-sm">Edit</Link>
             </div>
           </div>
 
-          <img
-            src="https://www.usnews.com/object/image/0000017f-2352-df1a-a3ff-b77bab9e0000/gettyimages-1369617365.jpg?update-time=1645565687144&size=responsive640"
-            alt="Profile"
-            className="rounded-full w-40 h-40 object-cover border-4 border-teal-200 mt-4 transform transition-all duration-300 hover:scale-105"
-          />
+          <div className="flex gap-6 mb-6">
+            {["Linkedin", "Github", "Facebook", "Twitter", "Dribbble"].map((icon, idx) => (
+              <Link key={idx} className="text-teal-600 hover:text-teal-800 transition-colors transform hover:scale-125">
+                {React.createElement(icons[icon], { size: 28 })}
+              </Link>
+            ))}
+          </div>
         </div>
 
+
         <div className="sm:w-2/3 flex flex-col gap-8">
-          <button
-            onClick={handleEditToggle}
-            className="self-end px-6 py-2 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition duration-300"
-          >
-            <Pen />
-          </button>
+          <h1 className="text-3xl font-semibold text-teal-700">Personal Details</h1>
 
-          <div className="space-y-4">
-            <h1 className="text-2xl font-medium text-teal-600">Personal Details</h1>
-
-            <div className="flex justify-between items-center space-y-1">
-              <p className="text-gray-700 font-semibold w-1/3">FirstName:</p>
-              <p className="text-gray-700 w-2/3">
-                {usersData.firstName}
-              </p>
+          <div className="bg-teal-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+            {/* <div className="flex justify-between items-center">
+              <p className="text-teal-600 font-medium">Budget:</p>
+              <p className="text-gray-800">${usersData.budget}</p>
+            </div> */}
+            <div className="flex justify-between items-center">
+              <p className="text-teal-600 font-medium">Remaining:</p>
+              <p className="text-gray-800">${usersData.remaining}</p>
             </div>
+          </div>
 
-            <div className="flex justify-between items-center space-y-1">
-              <p className="text-gray-700 font-semibold w-1/3">LastName:</p>
-              <p className="text-gray-700 w-2/3">
-                {usersData.lastName}
-              </p>
-            </div>
 
-            <div className="flex justify-between items-center space-y-1">
-              <p className="text-gray-700 font-semibold w-1/3">Email:</p>
-              <p className="text-gray-700 w-2/3">
-                {usersData.email}
-              </p>
-            </div>
-
-            <div className="flex justify-between items-center space-y-1">
-              <p className="text-gray-700 font-semibold w-1/3">Birthday:</p>
-              <p className="text-gray-700 w-2/3">
-                {usersData.dob ? usersData.dob.substring(0, 10) : "N/A"}
-              </p>
-            </div>
+          <div className="space-y-6">
+            {[
+              { label: "First Name", value: usersData.firstName },
+              { label: "Last Name", value: usersData.lastName },
+              { label: "Email", value: usersData.email },
+              { label: "Birthday", value: usersData.dob ? usersData.dob.substring(0, 10) : "N/A" },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-teal-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <div className="flex justify-between items-center">
+                  <p className="text-teal-600 font-medium">{item.label}:</p>
+                  <p className="text-gray-800">{item.value}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
+    </div>
   );
 };
+
+
+
 
 export default Profile;

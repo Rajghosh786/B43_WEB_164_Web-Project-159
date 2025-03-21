@@ -44,6 +44,10 @@ const Register = () => {
         lastName: lastName,
         dob: dob,
         createdAt: new Date(),
+        expenses:[],
+        incomes:[],
+        remaining:0,
+        budget:0
       })    
     }).then(() => {
       console.log('User data added to Firestore');
@@ -55,44 +59,100 @@ const Register = () => {
   }
 
   return (
-    <div className="max-w-lg mx-auto mt-8 p-6 border rounded-lg shadow-lg bg-white">
-      <form onSubmit={register}>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 font-semibold">Email:</label>
-          <input onChange={(e)=>setEmail(e.target.value)} type="email" id="email" name="email" required className="w-full p-3 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"/>
+    <div className="p-8 bg-gradient-to-r from-indigo-100 to-gray-200 min-h-screen">
+    <div className="max-w-lg mx-auto m-10 p-8 border rounded-lg shadow-lg bg-white">
+      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">Create Your Account</h2>
+      <form onSubmit={register} className="space-y-6">
+        <div className="mb-6">
+          <label htmlFor="email" className="block text-gray-700 font-semibold text-lg">Email:</label>
+          <input 
+            onChange={(e) => setEmail(e.target.value)} 
+            type="email" 
+            id="email" 
+            name="email" 
+            required 
+            className="w-full p-4 mt-2 border rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 text-lg" 
+            placeholder="Enter your email"
+          />
         </div>
-
-        <div className="mb-4">
-          <label htmlFor="firstName" className="block text-gray-700 font-semibold">First Name:</label>
-          <input onChange={(e)=>setFirstName(e.target.value)} type="text" id="firstName" name="firstName" required className="w-full p-3 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"/>
+  
+        <div className="mb-6">
+          <label htmlFor="firstName" className="block text-gray-700 font-semibold text-lg">First Name:</label>
+          <input 
+            onChange={(e) => setFirstName(e.target.value)} 
+            type="text" 
+            id="firstName" 
+            name="firstName" 
+            required 
+            className="w-full p-4 mt-2 border rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 text-lg" 
+            placeholder="Enter your first name"
+          />
         </div>
-
-        <div className="mb-4">
-          <label htmlFor="lastName" className="block text-gray-700 font-semibold">Last Name:</label>
-          <input onChange={(e)=>setLastName(e.target.value)} type="text" id="lastName" name="lastName" required className="w-full p-3 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"/>
+  
+        <div className="mb-6">
+          <label htmlFor="lastName" className="block text-gray-700 font-semibold text-lg">Last Name:</label>
+          <input 
+            onChange={(e) => setLastName(e.target.value)} 
+            type="text" 
+            id="lastName" 
+            name="lastName" 
+            required 
+            className="w-full p-4 mt-2 border rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 text-lg" 
+            placeholder="Enter your last name"
+          />
         </div>
-
-        <div className="mb-4">
-          <label htmlFor="dob" className="block text-gray-700 font-semibold">Date of Birth:</label>
-          <input onChange={(e)=>setDob(e.target.value)} type="date" id="dob" name="dob" required className="w-full p-3 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"/>
+  
+        <div className="mb-6">
+          <label htmlFor="dob" className="block text-gray-700 font-semibold text-lg">Date of Birth:</label>
+          <input 
+            onChange={(e) => setDob(e.target.value)} 
+            type="date" 
+            id="dob" 
+            name="dob" 
+            required 
+            className="w-full p-4 mt-2 border rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 text-lg"
+          />
         </div>
-
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700 font-semibold">Password:</label>
-          <input onChange={(e)=>setPassword(e.target.value)} type="password" id="password" name="password" required className="w-full p-3 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"/>
+  
+        <div className="mb-6">
+          <label htmlFor="password" className="block text-gray-700 font-semibold text-lg">Password:</label>
+          <input 
+            onChange={(e) => setPassword(e.target.value)} 
+            type="password" 
+            id="password" 
+            name="password" 
+            required 
+            className="w-full p-4 mt-2 border rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 text-lg" 
+            placeholder="Enter your password"
+          />
         </div>
-
-        <div className="mb-4">
-          <label htmlFor="confirmPassword" className="block text-gray-700 font-semibold">Confirm Password:</label>
-          <input onChange={(e)=>setConfirmPassword(e.target.value)} type="password" id="confirmPassword" name="confirmPassword" required className="w-full p-3 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"/>
+  
+        <div className="mb-6">
+          <label htmlFor="confirmPassword" className="block text-gray-700 font-semibold text-lg">Confirm Password:</label>
+          <input 
+            onChange={(e) => setConfirmPassword(e.target.value)} 
+            type="password" 
+            id="confirmPassword" 
+            name="confirmPassword" 
+            required 
+            className="w-full p-4 mt-2 border rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 text-lg" 
+            placeholder="Confirm your password"
+          />
         </div>
-
-        <div className="mt-6">
-          <button type="submit" className="w-full bg-indigo-600 text-white p-3 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600">Register</button>
+  
+        <div className="mt-8">
+          <button 
+            type="submit" 
+            className="w-full bg-indigo-600 text-white p-4 rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 text-lg"
+          >
+            Register
+          </button>
         </div>
       </form>
     </div>
-  )
+    </div>
+  );
+  
 }
 
 export default Register

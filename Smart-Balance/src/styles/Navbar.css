@@ -1,3 +1,9 @@
-.active{
-    background-color: red;
-}
+ .active {
+    color: #3b82f6; 
+  font-weight: bold;
+  }
+  
+ .active:hover {
+    color: #4338ca;
+  }
+  
