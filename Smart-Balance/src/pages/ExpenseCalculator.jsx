@@ -240,7 +240,7 @@ const ExpenseCalculator = () => {
       <div className="max-w-5xl mx-auto p-6">
         <div className="bg-white rounded-lg shadow-lg p-6">
           <h1 className="text-3xl font-semibold text-center text-gray-700 mb-6">Total Balance</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6">
             <div className="bg-pink-100 p-6 rounded-lg shadow-lg">
               <p className="text-xs text-gray-600">Total Expenses</p>
               <h1 className="text-xl font-bold mt-2 text-gray-800">${totalExpense}</h1>
@@ -260,7 +260,7 @@ const ExpenseCalculator = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold text-gray-700 mb-4">Income Section</h2>
             <form onSubmit={handleIncomeSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <input
                   type="text"
                   placeholder="Enter income description"
@@ -363,7 +363,7 @@ const ExpenseCalculator = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold text-gray-700 mb-4">Expense Section</h2>
             <form onSubmit={handleExpenseSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <input
                   type="text"
                   placeholder="Enter description"
@@ -471,6 +471,7 @@ const ExpenseCalculator = () => {
       </div>
     </div>
   );
+  
   
 };
 

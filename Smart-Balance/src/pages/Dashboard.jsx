@@ -120,10 +120,10 @@ const Dashboard = () => {
       {loading ? (
         <div className="text-lg text-gray-600">Loading...</div>
       ) : (
-        <div className="w-full max-w-4xl bg-white p-8 rounded-3xl shadow-xl">
-          <h2 className="text-4xl font-extrabold text-gray-800 mb-6">Expense & Income Dashboard</h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+        <div className="w-full max-w-5xl bg-white p-8 rounded-3xl shadow-xl">
+          <h2 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">Expense & Income Dashboard</h2>
+  
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
             <div className="p-6 border border-gray-200 rounded-xl shadow-lg bg-gradient-to-r from-red-50 to-red-100">
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Total Expenses</h3>
               <p className="text-3xl font-bold text-red-600">
@@ -138,10 +138,10 @@ const Dashboard = () => {
             </div>
           </div>
   
-          <div className="flex gap-6 mb-8">
+          <div className="flex flex-col lg:flex-row gap-6 mb-8">
             <div className="flex-1 p-6 border border-gray-200 rounded-xl shadow-lg bg-white">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">Filter by Date</h3>
-              <div className="flex gap-6">
+              <div className="flex flex-col sm:flex-row gap-6">
                 <div className="flex flex-col w-full">
                   <label className="text-sm font-medium text-gray-700">Start Date</label>
                   <input
@@ -168,7 +168,7 @@ const Dashboard = () => {
             <div className="mt-6 text-center text-gray-600">No data found for this date range.</div>
           ) : (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 mb-8">
                 <div className="p-6 border border-gray-200 rounded-xl shadow-lg bg-white">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">Expense Breakdown</h3>
                   <Pie data={expenseChartData} />
@@ -184,6 +184,7 @@ const Dashboard = () => {
       )}
     </div>
   );
+  
 };
 
 export default Dashboard;
