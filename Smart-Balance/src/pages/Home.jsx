@@ -10,20 +10,21 @@ function Home() {
   const [error, setError] = useState('')
   
   const getApi = async (pageNumber) => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const response = await axios.get(`https://newsapi.org/v2/everything?q=finance&pageSize=8&page=${pageNumber}&apiKey=e0cdf2ea62e94fccb775cd4c6a07144d`);
-      console.log(response.data)
-      setLoading(false)
-      const totalPages = Math.ceil(response.data.totalResults/8)
-      setResultCount(totalPages)
-      setArticles(response.data.articles)
+      const response = await axios.get(`/.netlify/functions/fetchNews?page=${pageNumber}`);
+      console.log(response.data);
+      setLoading(false);
+      const totalPages = Math.ceil(response.data.totalResults / 8);
+      setResultCount(totalPages);
+      setArticles(response.data.articles);
     } catch (error) {
-      setLoading(false)
-      setError(error.message)
-      console.log(error)
+      setLoading(false);
+      setError(error.message);
+      console.log(error);
     }
-  }
+  };
+  
   function next(){
     if(pageNumber < resultCount)
     setPageNumber(pageNumber+1)
